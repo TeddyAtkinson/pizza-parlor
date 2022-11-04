@@ -1,5 +1,6 @@
 window.addEventListener("load", function (event) {
   event.preventDefault();
+  document.getElementById("order").setAttribute("class", "hidden");
   const survey = document.getElementById("create");
   survey.addEventListener("submit", getCost);
 });
@@ -12,7 +13,7 @@ function Pizza(toppings, size) {
   this.currentPrice = 0
 }
 
-Pizza.prototype.sizePrice = function() {
+Pizza.prototype.sizePrice = function () {
   if (this.size === "small") {
     this.currentPrice = 4
   }
@@ -26,22 +27,22 @@ Pizza.prototype.sizePrice = function() {
   return this.currentPrice
 }
 
-Pizza.prototype.toppingPrice = function() {
-  this.currentPrice += (this.toppingarray.length * 2.5);
+Pizza.prototype.toppingPrice = function () {
+  this.currentPrice += (this.toppings.length * 2.5);
 
   return this.currentPrice
 }
 
+
 function getCost(event) {
   event.preventDefault();
-  let toppingarray = [];
-  document.querySelector("input:checkbox[name='toppings']:checked").each(function () {
-    toppingarray.push($(this).val());
-  });
+  let toppings = document.querySelector("input[name=toppings]:checked");
+    toppings.push(toppings);
 
   let newOrder = new Pizza(toppings, size);
   newOrder.sizePrice();
   newOrder.toppingPrice();
 
   document.getElementById("orderInfo").innerText = newOrder.currentPrice;
+  document.getElementById("order").removeAttribute("class");
 }
