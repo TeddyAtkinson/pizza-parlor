@@ -1,20 +1,25 @@
-
+window.addEventListener("load", function() {
+  const survey = document.getElementById("create");
+  survey.addEventListener("submit", result);
+});
 
 //------------------------------------------------------------------------------
 
 function Pizza (toppings, size) {
-  this.toppings = toppings
-  this.size = size
+  this.toppings = toppings;
+  this.size = size;
 }
 
-// //console.log(pepperoniPizza);
+const pepperoniPizza = new Pizza("pepperoni", "Small")
 
-Pizza.prototype.getCost = function () {
-  console.log(this.toppings) 
+console.log(pepperoniPizza);
+
+// Pizza.prototype.getCost = function () {
+//   console.log(this.toppings);
   
-  return cost
-}
+//   return cost;
+// }
 
-const newOrder = new Pizza("Large", ["Mushrooms", "Pepperoni"])
-console.log(newOrder)
-console.log(newOrder.getCost())
+const newOrder = new Pizza(["Mushrooms", "Pepperoni"], "Large")
+console.log(newOrder);
+// console.log(newOrder.getCost());
