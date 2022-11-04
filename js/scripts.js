@@ -36,13 +36,18 @@ Pizza.prototype.toppingPrice = function () {
 
 function getCost(event) {
   event.preventDefault();
-  let toppings = document.querySelector("input[name=toppings]:checked");
-    toppings.push(toppings);
-
+  let toppings = [];
+  const toppingsSelected = document.querySelectorAll('input[type=checkbox]:checked');
+  const size = document.querySelector('input[type=radio]:checked').value;
   let newOrder = new Pizza(toppings, size);
+
+  for (let i = 0; i < toppingsSelected.length; i++) {
+    newOrder.toppings.push(toppingsSelected[i].value)
+  }
+  console.log(toppings);
   newOrder.sizePrice();
   newOrder.toppingPrice();
 
-  document.getElementById("orderInfo").innerText = newOrder.currentPrice;
+  document.getElementById("orderInfo").innerText = '$' + newOrder.currentPrice;
   document.getElementById("order").removeAttribute("class");
 }
