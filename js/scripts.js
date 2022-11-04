@@ -1,25 +1,47 @@
-window.addEventListener("load", function() {
+window.addEventListener("load", function (event) {
+  event.preventDefault();
   const survey = document.getElementById("create");
-  survey.addEventListener("submit", result);
+  survey.addEventListener("submit", getCost);
 });
 
 //------------------------------------------------------------------------------
 
-function Pizza (toppings, size) {
+function Pizza(toppings, size) {
   this.toppings = toppings;
   this.size = size;
+  this.currentPrice = 0
 }
 
-const pepperoniPizza = new Pizza("pepperoni", "Small")
+Pizza.prototype.sizePrice = function() {
+  if (this.size === "small") {
+    this.currentPrice = 4
+  }
+  else if (this.size === "medium") {
+    this.currentPrice = 6
+  }
+  else if (this.size === "large") {
+    this.currentPrice = 8
+  }
 
-console.log(pepperoniPizza);
+  return this.currentPrice
+}
 
-// Pizza.prototype.getCost = function () {
-//   console.log(this.toppings);
-  
-//   return cost;
-// }
+Pizza.prototype.toppingPrice = function() {
+  this.currentPrice += (this.toppingarray.length * 2.5);
 
-const newOrder = new Pizza(["Mushrooms", "Pepperoni"], "Large")
-console.log(newOrder);
-// console.log(newOrder.getCost());
+  return this.currentPrice
+}
+
+function getCost(event) {
+  event.preventDefault();
+  let toppingarray = [];
+  document.querySelector("input:checkbox[name='toppings']:checked").each(function () {
+    toppingarray.push($(this).val());
+  });
+
+  let newOrder = new Pizza(toppings, size);
+  newOrder.sizePrice();
+  newOrder.toppingPrice();
+
+  document.getElementById("orderInfo").innerText = newOrder.currentPrice;
+}
