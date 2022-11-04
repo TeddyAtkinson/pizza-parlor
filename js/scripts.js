@@ -2,11 +2,19 @@
 
 //------------------------------------------------------------------------------
 
-function Pizza (size, toppings) {
-  this.size = size;
-  this.toppings = toppings;
+function Pizza (toppings, size) {
+  this.toppings = toppings
+  this.size = size
 }
 
-const pepperoniPizza = new Pizza("Large", "Pepperoni");
+// //console.log(pepperoniPizza);
 
-console.log(pepperoniPizza);
+Pizza.prototype.getCost = function () {
+  console.log(this.toppings) 
+  
+  return cost
+}
+
+const newOrder = new Pizza("Large", ["Mushrooms", "Pepperoni"])
+console.log(newOrder)
+console.log(newOrder.getCost())
